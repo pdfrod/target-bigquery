@@ -10,6 +10,8 @@
 # substantial portions of the Software.
 from google.cloud import bigquery
 
+OUTPUT_UPDATED_AT_FIELD = "updated_at"
+
 DEFAULT_SCHEMA = [
     bigquery.SchemaField(
         "data",

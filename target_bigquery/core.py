@@ -45,7 +45,7 @@ from google.cloud.bigquery.table import TimePartitioning, TimePartitioningType
 from singer_sdk.sinks import BatchSink
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_fixed
 
-from target_bigquery.constants import DEFAULT_SCHEMA
+from target_bigquery.constants import DEFAULT_SCHEMA, OUTPUT_UPDATED_AT_FIELD
 
 if TYPE_CHECKING:
     from target_bigquery.target import TargetBigQuery
@@ -445,7 +445,7 @@ class BaseBigQuerySink(BatchSink):
         metadata["id_hash"] = record.pop("_idHash")
 
         if "_updatedAt" in record:
-            metadata["updated_at"] = record.pop("_updatedAt")
+            metadata[OUTPUT_UPDATED_AT_FIELD] = record.pop("_updatedAt")
 
         return {"data": record, **metadata}
 
@@ -465,7 +465,7 @@ class BaseBigQuerySink(BatchSink):
         if partition_grain:
             kwargs["table"]["time_partitioning"] = TimePartitioning(
                 type_=PARTITION_STRATEGY[partition_grain.upper()],
-                field="_sdc_batched_at",
+                field=OUTPUT_UPDATED_AT_FIELD,
             )
         # Dataset opts
         location: str = self.config.get(
