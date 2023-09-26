@@ -10,6 +10,7 @@
 # substantial portions of the Software.
 from google.cloud import bigquery
 
+OUTPUT_ID_FIELD = "id_hash"
 OUTPUT_UPDATED_AT_FIELD = "updated_at"
 
 DEFAULT_SCHEMA = [
