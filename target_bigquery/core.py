@@ -407,7 +407,7 @@ class BaseBigQuerySink(BatchSink):
     @property
     def table_name(self) -> str:
         """Returns the table name."""
-        return self.stream_name.lower().replace("-", "_").replace(".", "_")
+        return self.stream_name.replace(".", "_")
 
     @property
     def max_size(self) -> int:
