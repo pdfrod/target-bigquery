@@ -442,6 +442,11 @@ class BaseBigQuerySink(BatchSink):
                 "_sdc_table_version",
             )
         }
+        metadata["id_hash"] = record.pop("_idHash")
+
+        if "_updatedAt" in record:
+            metadata["updated_at"] = record.pop("_updatedAt")
+
         return {"data": record, **metadata}
 
     @retry(

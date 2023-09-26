@@ -17,6 +17,16 @@ DEFAULT_SCHEMA = [
         description="Data ingested from Singer Tap",
     ),
     bigquery.SchemaField(
+        "id_hash",
+        bigquery.SqlTypeNames.STRING,
+        description="Hashed record ID",
+    ),
+    bigquery.SchemaField(
+        "updated_at",
+        bigquery.SqlTypeNames.TIMESTAMP,
+        description="Timestamp indicating when the record was last updated",
+    ),
+    bigquery.SchemaField(
         "_sdc_extracted_at",
         bigquery.SqlTypeNames.TIMESTAMP,
         description="Timestamp indicating when the record was extracted the record from the source",
