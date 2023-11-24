@@ -1,3 +1,11 @@
+# Fork notes
+
+This fork of [Target-BigQuery](https://github.com/z3z1ma/target-bigquery) adds the following changes:
+
+- renames field `data._idHash` to `id_hash` and uses it a clustering column (the ingested data is assumed to always have an `_idHash` field);
+- renames field `data._updatedAt` to `updated_at` (if exists) and uses this field as a partioning column (if `partition_granularity` is configured);
+- no longer replaces dashes by underscores and downcases table names.
+
 <h1 align="center">Target-BigQuery</h1>
 
 <p align="center">
